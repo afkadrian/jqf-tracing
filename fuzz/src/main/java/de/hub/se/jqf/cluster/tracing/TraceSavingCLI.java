@@ -119,7 +119,7 @@ public class TraceSavingCLI implements Runnable{
             Result res = GuidedFuzzing.run(testClassName, testMethodName, loader, guidance, System.out);
 
             // Safe ChoiceSequenceTree
-            guidance.choiceSequenceTree.save(outputDirectory);
+            //guidance.choiceSequenceTree.save(outputDirectory);
 
         if (Boolean.getBoolean("jqf.logCoverage")) {
                 System.out.println(String.format("Covered %d edges.",

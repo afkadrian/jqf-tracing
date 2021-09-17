@@ -142,11 +142,18 @@ public class ChoiceSequenceTree {
 
     public double branchDegree() {
 
+        int i = 0;
         double deg = 0;
         for (Node node : allNodes) {
-            deg = deg + node.deg();
+            if (node.deg() > 1) {
+                i++;
+                deg = deg + node.deg();
+            }
+
         }
-        return deg / allNodes.size();
+
+        if (i>0) return deg/i;
+        else return 0;
     }
 
 

@@ -32,9 +32,6 @@ dir_does_not_exist() {
    fi
 }
 
-echo $JQF_DIR
-echo $CLASSPATH
-
 for bench_index in {0..3}; do
   BENCHMARK=${BENCHMARKS[$bench_index]}
   TEST_CLASS=${TEST_CLASSES[$bench_index]}
@@ -47,7 +44,7 @@ for bench_index in {0..3}; do
     DIRNAME=${OUT_DIR}/zest/$BENCHMARK-$REP_IDX
     if dir_does_not_exist $DIRNAME ; then
 
-      bin/jqf-tracing -c $($CLASSPATH) edu.berkeley.cs.jqf.examples.$TEST_CLASS $TEST_METHOD -d 30m -o ${DIRNAME} &&
+      ${JQF_DIR}/bin/jqf-zest -c $($CLASSPATH) edu.berkeley.cs.jqf.examples.$TEST_CLASS $TEST_METHOD ${DIRNAME} &&
       PID=$!
       wait $PID
       echo "[$(date)] Finished zest. No need to replay." >> $LOG_FILE
@@ -56,7 +53,7 @@ for bench_index in {0..3}; do
     DIRNAME=${OUT_DIR}/random/$BENCHMARK-$REP_IDX
     if dir_does_not_exist $DIRNAME ; then
 
-      bin/jqf-tracing -b -n -c $($CLASSPATH) edu.berkeley.cs.jqf.examples.$TEST_CLASS $TEST_METHOD ${DIRNAME} &&
+      ${JQF_DIR}/bin/jqf-zest -b -n -c $($CLASSPATH) edu.berkeley.cs.jqf.examples.$TEST_CLASS $TEST_METHOD ${DIRNAME} &&
       PID=$!
       wait $PID
       echo "[$(date)] Finished random. No need to replay." >> $LOG_FILE

@@ -39,7 +39,6 @@ else
     java="java"
 fi
 "$java" -ea \
-  -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=1044 \
   -Xbootclasspath/a:"$INST_CLASSPATH" \
   ${JAVAAGENT} \
   -Djanala.conf="${SCRIPT_DIR}/janala.conf" \

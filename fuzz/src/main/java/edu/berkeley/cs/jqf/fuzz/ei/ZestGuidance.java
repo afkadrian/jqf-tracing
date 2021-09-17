@@ -238,7 +238,7 @@ public class ZestGuidance implements Guidance {
      */
     public ZestGuidance(String testName, Duration duration, File outputDirectory) throws IOException {
         this.testName = testName;
-        this.maxDurationMillis = duration != null ? duration.toMillis() : Long.MAX_VALUE;
+        this.maxDurationMillis = duration != null ? duration.toMillis() : 1800000;
         this.outputDirectory = outputDirectory;
         this.blind = Boolean.getBoolean("jqf.ei.TOTALLY_RANDOM");
         this.validityFuzzing = !Boolean.getBoolean("jqf.ei.DISABLE_VALIDITY_FUZZING");

@@ -133,7 +133,7 @@ public class TraceSavingGuidance extends ZestGuidance {
 
         this.choiceSequenceTree = new ChoiceSequenceTree();
         this.csTreeFile = new File(outputDirectory, "cstree_data.csv");
-        this.lastEntry = new Date();
+        this.lastEntry = startTime;
         appendLineToFile(csTreeFile, "timestemp,BranchDegree,UniquePaths,NumLeafs,NumNodes");
     }
 
@@ -256,10 +256,11 @@ public class TraceSavingGuidance extends ZestGuidance {
             choiceSequenceTree.insert(currentChoiceTypes);
             Date timestemp = new Date();
 
-            if (timestemp.compareTo(lastEntry) > 0) {
+            if ((timestemp.getTime() - lastEntry.getTime() >= 1000) || (lastEntry.equals(startTime))) {
 
+                long elapsed = (timestemp.getTime()-startTime.getTime());
                 appendLineToFile(csTreeFile,
-                        timestemp + "," + choiceSequenceTree.branchDegree() + "," + choiceSequenceTree.getUniquePaths() + "," + choiceSequenceTree.getNumLeafs() + "," + choiceSequenceTree.size());
+                        elapsed + "," + choiceSequenceTree.branchDegree() + "," + choiceSequenceTree.getUniquePaths() + "," + choiceSequenceTree.getNumLeafs() + "," + choiceSequenceTree.size());
                 lastEntry = timestemp;
             }
 
